@@ -28,15 +28,15 @@ public class FreezerController {
 //            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
 //            @ApiResponse(responseCode = "404", description = "Person not found", content = @Content)})
 
-    @Operation(summary = "Get an item by name")
+    @Operation(summary = "Create an item for the freezer")
     @PostMapping("/create")
     public String createFreezerItem(@RequestBody FreezerItem freezerItem) throws ExecutionException, InterruptedException {
         return freezerService.createFreezerItem(freezerItem);
     }
 
     @GetMapping("/get")
-    public FreezerItem getFreezerItemByItemName(@RequestParam String objectId) throws ExecutionException, InterruptedException {
-        return freezerService.getFreezerItemByItemName(objectId);
+    public FreezerItem getFreezerItemByItemName(@RequestParam String item) throws ExecutionException, InterruptedException {
+        return freezerService.getFreezerItemByItemName(item);
     }
 
     @PutMapping("/update")

@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutionException;
 
 public interface FreezerService {
 
-    FreezerItem getFreezerItemByItemName(final String objectId) throws ExecutionException, InterruptedException;
+    FreezerItem getFreezerItemByItemName(final String item) throws ExecutionException, InterruptedException;
 
     // getFreezeritembeforeDate
     // getFreezeritemByCategory
