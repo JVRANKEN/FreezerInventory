@@ -1,4 +1,4 @@
-package com.example.demofirebase;
+package com.freezer.inventory;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

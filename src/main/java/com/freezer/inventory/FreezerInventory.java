@@ -1,4 +1,4 @@
-package com.example.demofirebase;
+package com.freezer.inventory;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -8,16 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 
 @SpringBootApplication
-public class DemoFirebaseApplication {
+public class FreezerInventory {
 	private static final String FIREBASE_FILE_NAME = "serviceAccountKey.json";
 
 	public static void main(String[] args) throws IOException {
-		ClassLoader classLoader = DemoFirebaseApplication.class.getClassLoader();
+		ClassLoader classLoader = FreezerInventory.class.getClassLoader();
 		File file = new File(Objects.requireNonNull(classLoader.getResource(FIREBASE_FILE_NAME)).getFile());
 		String abspath = file.getAbsolutePath();
 		FileInputStream serviceAccount = new FileInputStream(file.getAbsolutePath());
@@ -30,7 +29,7 @@ public class DemoFirebaseApplication {
 			FirebaseApp.initializeApp(options);
 		}
 
-		SpringApplication.run(DemoFirebaseApplication.class, args);
+		SpringApplication.run(FreezerInventory.class, args);
 	}
 
 }
