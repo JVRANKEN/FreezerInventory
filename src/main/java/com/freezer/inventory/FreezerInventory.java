@@ -18,7 +18,6 @@ public class FreezerInventory {
 	public static void main(String[] args) throws IOException {
 		ClassLoader classLoader = FreezerInventory.class.getClassLoader();
 		File file = new File(Objects.requireNonNull(classLoader.getResource(FIREBASE_FILE_NAME)).getFile());
-		String abspath = file.getAbsolutePath();
 		FileInputStream serviceAccount = new FileInputStream(file.getAbsolutePath());
 
 		FirebaseOptions options = new FirebaseOptions.Builder()

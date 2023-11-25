@@ -5,9 +5,12 @@ import com.freezer.inventory.service.FreezerService;
 import com.freezer.inventory.utility.UrlMapping;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -34,9 +37,12 @@ public class FreezerController {
         return freezerService.createFreezerItem(freezerItem);
     }
 
-    @GetMapping("/get")
-    public FreezerItem getFreezerItemByItemName(@RequestParam String item) throws ExecutionException, InterruptedException {
-        return freezerService.getFreezerItemByItemName(item);
+    @GetMapping("/get/item")
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByItem(@RequestParam String item) throws ExecutionException, InterruptedException {
+
+        List<FreezerItem> freezerItemList =  freezerService.getFreezerItemByItemName(item);
+
+        return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
 
     @PutMapping("/update")
