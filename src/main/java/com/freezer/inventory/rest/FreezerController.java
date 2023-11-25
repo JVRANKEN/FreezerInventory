@@ -32,12 +32,12 @@ public class FreezerController {
 //            @ApiResponse(responseCode = "404", description = "Person not found", content = @Content)})
 
     @Operation(summary = "Create an item for the freezer")
-    @PostMapping("/create")
+    @PostMapping(UrlMapping.CREATE)
     public String createFreezerItem(@RequestBody FreezerItem freezerItem) throws ExecutionException, InterruptedException {
         return freezerService.createFreezerItem(freezerItem);
     }
 
-    @GetMapping("/get/item")
+    @GetMapping(UrlMapping.GET_ITEM)
     public ResponseEntity<List<FreezerItem>> getFreezerItemByItem(@RequestParam String item) throws ExecutionException, InterruptedException {
 
         List<FreezerItem> freezerItemList =  freezerService.getFreezerItemByItemName(item);
@@ -45,12 +45,12 @@ public class FreezerController {
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping(UrlMapping.UPDATE)
     public String updateFreezerItem(@RequestBody FreezerItem person) throws ExecutionException, InterruptedException {
         return freezerService.updateFreezerItem(person);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping(UrlMapping.DELETE)
     public String deleteFreezerItem(@RequestParam String documentId) throws ExecutionException, InterruptedException {
         return freezerService.deleteFreezerItem(documentId);
     }
