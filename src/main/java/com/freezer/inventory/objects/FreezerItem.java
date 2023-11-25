@@ -18,11 +18,16 @@ public class FreezerItem {
     @Id
     private Long id;
     private String item;
+    // EXAMPLE: vlees, groenten, vis
     private String category;
+    // Example kip
+    private String type;
     private Long quantity;
     // weigth = in gram
+    private Long weight;
     private Date expiryDate;
     private Date frozenDate;
     private Long maxMonths;
+    private String comment;
 
 }

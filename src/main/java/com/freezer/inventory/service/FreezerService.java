@@ -3,11 +3,12 @@ package com.freezer.inventory.service;
 
 import com.freezer.inventory.objects.FreezerItem;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface FreezerService {
 
-    FreezerItem getFreezerItemByItemName(final String objectId) throws ExecutionException, InterruptedException;
+    List<FreezerItem> getFreezerItemByItemName(final String item) throws ExecutionException, InterruptedException;
 
     // getFreezeritembeforeDate
     // getFreezeritemByCategory

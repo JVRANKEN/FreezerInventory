@@ -5,9 +5,12 @@ import com.freezer.inventory.service.FreezerService;
 import com.freezer.inventory.utility.UrlMapping;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -28,23 +31,26 @@ public class FreezerController {
 //            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
 //            @ApiResponse(responseCode = "404", description = "Person not found", content = @Content)})
 
-    @Operation(summary = "Get an item by name")
-    @PostMapping("/create")
+    @Operation(summary = "Create an item for the freezer")
+    @PostMapping(UrlMapping.CREATE)
     public String createFreezerItem(@RequestBody FreezerItem freezerItem) throws ExecutionException, InterruptedException {
         return freezerService.createFreezerItem(freezerItem);
     }
 
-    @GetMapping("/get")
-    public FreezerItem getFreezerItemByItemName(@RequestParam String objectId) throws ExecutionException, InterruptedException {
-        return freezerService.getFreezerItemByItemName(objectId);
+    @GetMapping(UrlMapping.GET_ITEM)
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByItem(@RequestParam String item) throws ExecutionException, InterruptedException {
+
+        List<FreezerItem> freezerItemList =  freezerService.getFreezerItemByItemName(item);
+
+        return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping(UrlMapping.UPDATE)
     public String updateFreezerItem(@RequestBody FreezerItem person) throws ExecutionException, InterruptedException {
         return freezerService.updateFreezerItem(person);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping(UrlMapping.DELETE)
     public String deleteFreezerItem(@RequestParam String documentId) throws ExecutionException, InterruptedException {
         return freezerService.deleteFreezerItem(documentId);
     }
