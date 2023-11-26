@@ -37,14 +37,6 @@ public class FreezerController {
         return freezerService.createFreezerItem(freezerItem);
     }
 
-    @GetMapping(UrlMapping.GET_ITEM)
-    public ResponseEntity<List<FreezerItem>> getFreezerItemByItem(@RequestParam String item) throws ExecutionException, InterruptedException {
-
-        List<FreezerItem> freezerItemList =  freezerService.getFreezerItemByItemName(item);
-
-        return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
-    }
-
     @PutMapping(UrlMapping.UPDATE)
     public String updateFreezerItem(@RequestBody FreezerItem person) throws ExecutionException, InterruptedException {
         return freezerService.updateFreezerItem(person);
