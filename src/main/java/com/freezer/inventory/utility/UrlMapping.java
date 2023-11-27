@@ -8,7 +8,13 @@ public class UrlMapping {
     public static final String DELETE = "/delete";
     public static final String ID = "/id";
     public static final String GET = "/get";
+    public static final String SEARCH = "/search";
     //
     public static final String FREEZER = "/freezer";
     public static final String GET_ITEM = GET + "/item";
+    public static final String GET_TYPE = GET + "/type";
+    public static final String GET_CATEGORY = GET + "/category";
+    public static final String GET_EXPIRYDATE = GET + "/expirydate";
+    public static final String GET_FROZENDATE_ADD_MONTHS = GET + "/frozendate";
+
 }
