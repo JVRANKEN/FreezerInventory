@@ -7,11 +7,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.text.ParseException;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -20,7 +22,7 @@ public class FreezerControllerSearch {
     @Autowired
     private FreezerService freezerService;
 
-    public FreezerControllerSearch(FreezerService personCrudService) {
+    public FreezerControllerSearch(final FreezerService personCrudService) {
         this.freezerService = personCrudService;
     }
 
@@ -34,27 +36,27 @@ public class FreezerControllerSearch {
 
     @Operation(summary = "Get an item by item property")
     @GetMapping(UrlMapping.GET_ITEM)
-    public ResponseEntity<List<FreezerItem>> getFreezerItemByItem(@RequestParam String item) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByItem(@RequestParam final String item) throws ExecutionException, InterruptedException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByItemName(item);
+        final List<FreezerItem> freezerItemList = freezerService.getFreezerItemByItemName(item);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
 
     @Operation(summary = "Get an item by type property")
     @GetMapping(UrlMapping.GET_TYPE)
-    public ResponseEntity<List<FreezerItem>> getFreezerItemByType(@RequestParam String type) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByType(@RequestParam final String type) throws ExecutionException, InterruptedException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByType(type);
+        final List<FreezerItem> freezerItemList = freezerService.getFreezerItemByType(type);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
 
     @Operation(summary = "Get an item by category property")
     @GetMapping(UrlMapping.GET_CATEGORY)
-    public ResponseEntity<List<FreezerItem>> getFreezerItemByCategory(@RequestParam String category) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByCategory(@RequestParam final String category) throws ExecutionException, InterruptedException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByCategory(category);
+        final List<FreezerItem> freezerItemList = freezerService.getFreezerItemByCategory(category);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
@@ -67,11 +69,11 @@ public class FreezerControllerSearch {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    @Operation(summary = "Get all items untill expiry date and items untill expiry date + twoo weeks")
+    @Operation(summary = "Get all items untill expiry date")
     @GetMapping(UrlMapping.GET_EXPIRYDATE)
-    public ResponseEntity<List<FreezerItem>> getFreezerItemByDateExpire(@RequestParam Date dateExpiry) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByDateExpire(@RequestParam final String dateExpiry) throws ExecutionException, InterruptedException, ParseException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByDateExpire(dateExpiry);
+        final List<FreezerItem> freezerItemList = freezerService.getFreezerItemByDateExpire(dateExpiry);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
@@ -86,9 +88,9 @@ public class FreezerControllerSearch {
      */
     @Operation(summary = "Get all items untill expiry date and items untill expiry date + twoo weeks")
     @GetMapping(UrlMapping.GET_FROZENDATE_ADD_MONTHS)
-    public ResponseEntity<List<FreezerItem>> getFreezerItemByFrozenDateAndMaxMonths(@RequestParam Date date) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByFrozenDateAndMaxMonths(@RequestParam final String date, @RequestParam final int extraMonths) throws ExecutionException, InterruptedException, ParseException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByFrozenDateAndMaxMonths(date);
+        final List<FreezerItem> freezerItemList = freezerService.getFreezerItemByFrozenDateAndMaxMonths(date, extraMonths);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
