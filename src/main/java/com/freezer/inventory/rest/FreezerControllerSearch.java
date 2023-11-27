@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -44,7 +45,7 @@ public class FreezerControllerSearch {
     @GetMapping(UrlMapping.GET_TYPE)
     public ResponseEntity<List<FreezerItem>> getFreezerItemByType(@RequestParam String type) throws ExecutionException, InterruptedException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByItemName(type);
+        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByType(type);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
@@ -53,7 +54,7 @@ public class FreezerControllerSearch {
     @GetMapping(UrlMapping.GET_CATEGORY)
     public ResponseEntity<List<FreezerItem>> getFreezerItemByCategory(@RequestParam String category) throws ExecutionException, InterruptedException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByItemName(category);
+        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByCategory(category);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
@@ -61,16 +62,16 @@ public class FreezerControllerSearch {
     /**
      * Get all items untill the date, get also all items untill date + 2 weeks
      *
-     * @param category
+     * @param dateExpiry
      * @return
      * @throws ExecutionException
      * @throws InterruptedException
      */
     @Operation(summary = "Get all items untill expiry date and items untill expiry date + twoo weeks")
     @GetMapping(UrlMapping.GET_EXPIRYDATE)
-    public ResponseEntity<List<FreezerItem>> getFreezerItemByDateExpire(@RequestParam String category) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByDateExpire(@RequestParam Date dateExpiry) throws ExecutionException, InterruptedException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByItemName(category);
+        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByDateExpire(dateExpiry);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }
@@ -78,16 +79,16 @@ public class FreezerControllerSearch {
     /**
      * Get all items untill the frozen date + add maxMonths, also plus 2 weeks??
      *
-     * @param category
+     * @param date
      * @return
      * @throws ExecutionException
      * @throws InterruptedException
      */
     @Operation(summary = "Get all items untill expiry date and items untill expiry date + twoo weeks")
     @GetMapping(UrlMapping.GET_FROZENDATE_ADD_MONTHS)
-    public ResponseEntity<List<FreezerItem>> getFreezerItemByFrozenDateAndMaxMonths(@RequestParam String category) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<FreezerItem>> getFreezerItemByFrozenDateAndMaxMonths(@RequestParam Date date) throws ExecutionException, InterruptedException {
 
-        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByItemName(category);
+        List<FreezerItem> freezerItemList = freezerService.getFreezerItemByFrozenDateAndMaxMonths(date);
 
         return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
     }

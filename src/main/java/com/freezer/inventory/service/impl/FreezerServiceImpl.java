@@ -9,6 +9,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -20,6 +21,70 @@ public class FreezerServiceImpl implements FreezerService {
     @Override
     public List<FreezerItem> getFreezerItemByItemName(String item) throws ExecutionException, InterruptedException {
         ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_PERSON).whereEqualTo("item", item).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<FreezerItem> freezerItemList = new ArrayList<>();
+
+        for (DocumentSnapshot document : documents) {
+            FreezerItem freezerItem =  document.toObject(FreezerItem.class);
+            freezerItemList.add(freezerItem);
+        }
+
+        return freezerItemList;
+    }
+
+    @Override
+    public List<FreezerItem> getFreezerItemByType(String type) throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_PERSON).whereEqualTo("type", type).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<FreezerItem> freezerItemList = new ArrayList<>();
+
+        for (DocumentSnapshot document : documents) {
+            FreezerItem freezerItem =  document.toObject(FreezerItem.class);
+            freezerItemList.add(freezerItem);
+        }
+
+        return freezerItemList;
+    }
+
+    @Override
+    public List<FreezerItem> getFreezerItemByCategory(String category) throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_PERSON).whereEqualTo("category", category).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<FreezerItem> freezerItemList = new ArrayList<>();
+
+        for (DocumentSnapshot document : documents) {
+            FreezerItem freezerItem =  document.toObject(FreezerItem.class);
+            freezerItemList.add(freezerItem);
+        }
+
+        return freezerItemList;
+    }
+
+    @Override
+    public List<FreezerItem> getFreezerItemByDateExpire(Date dateExpiry) throws ExecutionException, InterruptedException {
+        // TODO date expiry + two weeks
+        // does fieldpath work?
+        FieldPath.of("dateExpiry");
+        // Date to string
+        ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_PERSON).whereLessThanOrEqualTo("dateExpiry", "").get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<FreezerItem> freezerItemList = new ArrayList<>();
+
+        for (DocumentSnapshot document : documents) {
+            FreezerItem freezerItem =  document.toObject(FreezerItem.class);
+            freezerItemList.add(freezerItem);
+        }
+
+        return freezerItemList;
+    }
+
+    @Override
+    public List<FreezerItem> getFreezerItemByFrozenDateAndMaxMonths(Date date) throws ExecutionException, InterruptedException {
+        // TODO date expiry + two weeks
+        // does fieldpath work?
+        FieldPath.of("dateExpiry");
+        // Date to string
+        ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_PERSON).whereLessThanOrEqualTo("date", "").get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         List<FreezerItem> freezerItemList = new ArrayList<>();
 
