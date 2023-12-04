@@ -10,14 +10,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class FreezerItem {
-    @Id
-    private Long id;
     private String item;
     // EXAMPLE: vlees, groenten, vis
     private String category;
@@ -31,4 +28,8 @@ public class FreezerItem {
     private Long maxMonths;
     private String comment;
 
+    @Override
+    public String toString() {
+        return "<" + "item=" + item + ", category=" + category + ", type=" + type + ", comment=" + comment + ">";
+    }
 }

@@ -34,6 +34,15 @@ public class FreezerControllerSearch {
 //            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
 //            @ApiResponse(responseCode = "404", description = "Person not found", content = @Content)})
 
+    @Operation(summary = "Get all items from the freezer")
+    @GetMapping()
+    public ResponseEntity<List<FreezerItem>> getAllFreezerItems() throws ExecutionException, InterruptedException {
+
+        final List<FreezerItem> freezerItemList = freezerService.getAllFreezerItems();
+
+        return new ResponseEntity<>(freezerItemList, HttpStatus.OK);
+    }
+
     @Operation(summary = "Get an item by item property")
     @GetMapping(UrlMapping.GET_ITEM)
     public ResponseEntity<List<FreezerItem>> getFreezerItemByItem(@RequestParam final String item) throws ExecutionException, InterruptedException {

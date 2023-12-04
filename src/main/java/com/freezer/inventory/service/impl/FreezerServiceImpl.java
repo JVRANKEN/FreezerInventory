@@ -1,5 +1,7 @@
 package com.freezer.inventory.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.freezer.inventory.objects.FreezerItem;
 import com.freezer.inventory.service.FreezerService;
 import com.google.api.core.ApiFuture;
@@ -7,7 +9,6 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +22,19 @@ public class FreezerServiceImpl implements FreezerService {
     private final Firestore dbFireStore = FirestoreClient.getFirestore();
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+    @Override
+    public List<FreezerItem> getAllFreezerItems() throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_FREEZER).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<FreezerItem> freezerItemList = new ArrayList<>();
+
+        for (DocumentSnapshot document : documents) {
+            FreezerItem freezerItem = document.toObject(FreezerItem.class);
+            freezerItemList.add(freezerItem);
+        }
+
+        return freezerItemList;
+    }
 
     @Override
     public List<FreezerItem> getFreezerItemByItemName(String item) throws ExecutionException, InterruptedException {
@@ -117,18 +131,17 @@ public class FreezerServiceImpl implements FreezerService {
 
     @Override
     public String createFreezerItem(FreezerItem freezerItem) throws ExecutionException, InterruptedException {
-        ApiFuture<WriteResult> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
-                .document(String.valueOf(freezerItem.getId()))
-                .set(freezerItem);
+        ApiFuture<DocumentReference> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
+                .add(freezerItem);
 
-        return collectionApiFuture.get().getUpdateTime().toString();
+        return collectionApiFuture.get().toString();
     }
 
     @Override
-    public String updateFreezerItem(FreezerItem freezerItem) throws ExecutionException, InterruptedException {
+    public String updateFreezerItem(FreezerItem freezerItem, String documentId) throws ExecutionException, InterruptedException {
         // In our cases -> we are going to update not on firstName but on objectId
         ApiFuture<WriteResult> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
-                .document(String.valueOf(freezerItem.getId()))
+                .document(documentId)
                 .set(freezerItem);
 
         return collectionApiFuture.get().getUpdateTime().toString();
@@ -139,5 +152,19 @@ public class FreezerServiceImpl implements FreezerService {
         ApiFuture<WriteResult> writeResultApiFuture = dbFireStore.collection(DATABASE_FREEZER).document(documentId).delete();
 
         return "deleted on: " + writeResultApiFuture.get().getUpdateTime().toString();
+    }
+
+    @Override
+    public String deleteFreezerItemByName(String itemName) throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_FREEZER).whereEqualTo("item", itemName).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<String> logMessageList = new ArrayList<>();
+        for (DocumentSnapshot document : documents) {
+            String documentId = document.getId();
+            ApiFuture<WriteResult> writeResultApiFuture = dbFireStore.collection(DATABASE_FREEZER).document(documentId).delete();
+            logMessageList.add(itemName + " with DocID: <" + documentId + "> deleted on: " + writeResultApiFuture.get().getUpdateTime());
+        }
+
+        return String.join("/n", logMessageList);
     }
 }

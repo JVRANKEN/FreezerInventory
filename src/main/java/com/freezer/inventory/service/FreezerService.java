@@ -1,6 +1,7 @@
 package com.freezer.inventory.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.freezer.inventory.objects.FreezerItem;
 
 import java.text.ParseException;
@@ -8,6 +9,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface FreezerService {
+
+    List<FreezerItem> getAllFreezerItems() throws ExecutionException, InterruptedException;
 
     List<FreezerItem> getFreezerItemByItemName(final String item) throws ExecutionException, InterruptedException;
 
@@ -21,8 +24,8 @@ public interface FreezerService {
 
     String createFreezerItem(FreezerItem person) throws ExecutionException, InterruptedException;
 
-    String updateFreezerItem(FreezerItem person) throws ExecutionException, InterruptedException;
+    String updateFreezerItem(FreezerItem freezerItem, String documentId) throws ExecutionException, InterruptedException;
 
     String deleteFreezerItem(String documentId) throws ExecutionException, InterruptedException;
-    // delete freezer item quantity , or lower it
+    String deleteFreezerItemByName(String itemName) throws ExecutionException, InterruptedException;
 }

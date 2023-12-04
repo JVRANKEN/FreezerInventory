@@ -11,10 +11,17 @@ public class UrlMapping {
     public static final String SEARCH = "/search";
     //
     public static final String FREEZER = "/freezer";
+    public static final String FREEZER_INTERNAL_TESTING = FREEZER + "/internaltesting";
+
     public static final String GET_ITEM = GET + "/item";
     public static final String GET_TYPE = GET + "/type";
     public static final String GET_CATEGORY = GET + "/category";
     public static final String GET_EXPIRYDATE = GET + "/expirydate";
     public static final String GET_FROZENDATE_ADD_MONTHS = GET + "/frozendate";
+    public static final String DELETE_BY_DOCUMENT_ID = DELETE + "/documentid";
+    public static final String DELETE_BY_ITEM = DELETE + "/item";
+
+    public static final String EXPORT_FIREBASE = "/exportfirebase";
+    public static final String IMPORT_FIREBASE = "/importfirebase";
 
 }

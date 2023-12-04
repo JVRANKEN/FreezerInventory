@@ -1,0 +1,123 @@
+[
+  {
+    "item": "ijs",
+    "category": "dessert",
+    "type": "vanille",
+    "quantity": 1,
+    "weight": 500,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 12,
+    "comment": "Gross markt vanille ijs"
+  },
+  {
+    "item": "ijs",
+    "category": "dessert",
+    "type": "snickers",
+    "quantity": 5,
+    "weight": 80,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 12,
+    "comment": "Snickers repen"
+  },
+  {
+    "item": "bosvruchten",
+    "category": "fruit",
+    "type": "gemengd fruit",
+    "quantity": 1,
+    "weight": 250,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 12,
+    "comment": "gemengd fruit voor in smoothies"
+  },
+  {
+    "item": "Gehakt",
+    "category": "vlees",
+    "type": "kip",
+    "quantity": 2,
+    "weight": 150,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 0,
+    "comment": "Lidl"
+  },
+  {
+    "item": "avocado",
+    "category": "groenten",
+    "type": "groenten",
+    "quantity": 2,
+    "weight": 150,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 12,
+    "comment": "blokjes ingevroren"
+  },
+  {
+    "item": "hamburger",
+    "category": "vlees",
+    "type": "rund",
+    "quantity": 2,
+    "weight": 250,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 12,
+    "comment": "Aldi"
+  },
+  {
+    "item": "Gehakt",
+    "category": "vlees",
+    "type": "rund/varken",
+    "quantity": 1,
+    "weight": 1000,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 0,
+    "comment": "Lidl"
+  },
+  {
+    "item": "Gehakt",
+    "category": "vlees",
+    "type": "rund",
+    "quantity": 4,
+    "weight": 200,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 12,
+    "comment": "Aldi"
+  },
+  {
+    "item": "Broccoli",
+    "category": "groenten",
+    "type": "",
+    "quantity": 1,
+    "weight": 300,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 12,
+    "comment": "Colruyt "
+  },
+  {
+    "item": "Asperges",
+    "category": "groenten",
+    "type": "",
+    "quantity": 1,
+    "weight": 100,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 12,
+    "comment": ""
+  },
+  {
+    "item": "spinazie",
+    "category": "groenten",
+    "type": "boursin",
+    "quantity": 1,
+    "weight": 450,
+    "expiryDate": 1704060791026,
+    "frozenDate": 1703974391026,
+    "maxMonths": 4,
+    "comment": ""
+  }
+]
