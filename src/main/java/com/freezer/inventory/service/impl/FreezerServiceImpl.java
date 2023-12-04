@@ -1,5 +1,7 @@
 package com.freezer.inventory.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.freezer.inventory.objects.FreezerItem;
 import com.freezer.inventory.service.FreezerService;
 import com.google.api.core.ApiFuture;
@@ -8,6 +10,9 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +25,6 @@ public class FreezerServiceImpl implements FreezerService {
     private static final String DATABASE_FREEZER = "freezer_items";
     private final Firestore dbFireStore = FirestoreClient.getFirestore();
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
 
     @Override
     public List<FreezerItem> getAllFreezerItems() throws ExecutionException, InterruptedException {
@@ -35,6 +39,7 @@ public class FreezerServiceImpl implements FreezerService {
 
         return freezerItemList;
     }
+
     @Override
     public List<FreezerItem> getFreezerItemByItemName(String item) throws ExecutionException, InterruptedException {
         ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_FREEZER).whereEqualTo("item", item).get();

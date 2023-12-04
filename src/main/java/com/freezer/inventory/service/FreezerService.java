@@ -1,6 +1,7 @@
 package com.freezer.inventory.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.freezer.inventory.objects.FreezerItem;
 
 import java.text.ParseException;

@@ -11,6 +11,8 @@ public class UrlMapping {
     public static final String SEARCH = "/search";
     //
     public static final String FREEZER = "/freezer";
+    public static final String FREEZER_INTERNAL_TESTING = FREEZER + "/internaltesting";
+
     public static final String GET_ITEM = GET + "/item";
     public static final String GET_TYPE = GET + "/type";
     public static final String GET_CATEGORY = GET + "/category";
