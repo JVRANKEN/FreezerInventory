@@ -23,6 +23,19 @@ public class FreezerServiceImpl implements FreezerService {
 
 
     @Override
+    public List<FreezerItem> getAllFreezerItems() throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_FREEZER).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<FreezerItem> freezerItemList = new ArrayList<>();
+
+        for (DocumentSnapshot document : documents) {
+            FreezerItem freezerItem = document.toObject(FreezerItem.class);
+            freezerItemList.add(freezerItem);
+        }
+
+        return freezerItemList;
+    }
+    @Override
     public List<FreezerItem> getFreezerItemByItemName(String item) throws ExecutionException, InterruptedException {
         ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_FREEZER).whereEqualTo("item", item).get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();

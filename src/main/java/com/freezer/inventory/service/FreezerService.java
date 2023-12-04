@@ -9,6 +9,8 @@ import java.util.concurrent.ExecutionException;
 
 public interface FreezerService {
 
+    List<FreezerItem> getAllFreezerItems() throws ExecutionException, InterruptedException;
+
     List<FreezerItem> getFreezerItemByItemName(final String item) throws ExecutionException, InterruptedException;
 
     List<FreezerItem> getFreezerItemByType(String type) throws ExecutionException, InterruptedException;
