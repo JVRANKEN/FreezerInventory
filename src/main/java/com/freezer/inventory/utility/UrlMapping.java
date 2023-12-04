@@ -22,5 +22,6 @@ public class UrlMapping {
     public static final String DELETE_BY_ITEM = DELETE + "/item";
 
     public static final String EXPORT_FIREBASE = "/exportfirebase";
+    public static final String IMPORT_FIREBASE = "/importfirebase";
 
 }

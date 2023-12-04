@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -24,11 +25,18 @@ public class FreezerControllerInternalTesting {
     }
 
 
-    @Operation(summary = "Export all the data to a json")
+    @Operation(summary = "Export all the data from Firebase to a json in resources folder")
     @GetMapping(UrlMapping.EXPORT_FIREBASE)
     public ResponseEntity<String> getAllFreezerItemsExportJSON() throws ExecutionException, InterruptedException, JsonProcessingException {
-
         final String exportResult = freezerServiceInternalTesting.exportDatabaseItemsToJSON();
+
+        return new ResponseEntity<>(exportResult, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Import the data from a json file, export data to firebase")
+    @GetMapping(UrlMapping.IMPORT_FIREBASE)
+    public ResponseEntity<String> importDataFromFileToFirebase() throws IOException, ExecutionException, InterruptedException {
+        final String exportResult = freezerServiceInternalTesting.importDataFromFileToFirebase();
 
         return new ResponseEntity<>(exportResult, HttpStatus.OK);
     }

@@ -9,10 +9,6 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
-
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
