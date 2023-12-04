@@ -1,8 +1,6 @@
 package com.freezer.inventory.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.freezer.inventory.objects.FreezerItem;
-import com.freezer.inventory.service.FreezerService;
 import com.freezer.inventory.service.FreezerServiceInternalTesting;
 import com.freezer.inventory.utility.UrlMapping;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -28,10 +25,10 @@ public class FreezerControllerInternalTesting {
 
 
     @Operation(summary = "Export all the data to a json")
-    @GetMapping()
+    @GetMapping(UrlMapping.EXPORT_FIREBASE)
     public ResponseEntity<String> getAllFreezerItemsExportJSON() throws ExecutionException, InterruptedException, JsonProcessingException {
 
-        final String exportResult = freezerServiceInternalTesting.getAllFreezerItemsToJSON();
+        final String exportResult = freezerServiceInternalTesting.exportDatabaseItemsToJSON();
 
         return new ResponseEntity<>(exportResult, HttpStatus.OK);
     }

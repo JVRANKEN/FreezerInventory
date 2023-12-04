@@ -7,11 +7,15 @@ import com.freezer.inventory.service.FreezerServiceInternalTesting;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import org.apache.http.client.utils.DateUtils;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,9 +27,10 @@ public class FreezerServiceInternalTestingImpl implements FreezerServiceInternal
     private final Firestore dbFireStore = FirestoreClient.getFirestore();
 
     @Override
-    public String getAllFreezerItemsToJSON() throws ExecutionException, InterruptedException, JsonProcessingException {
-        URL path = this.getClass().getClassLoader().getResource("/data");
-
+    public String exportDatabaseItemsToJSON() throws ExecutionException, InterruptedException, JsonProcessingException {
+        String path = "src/main/resources/datasets/firebase_" + DateUtils.formatDate(new Date(), "yyyy_MM_dd_HH_mm_ss") + ".json";
+        File filePath = new File(path);
+        String absolutePath = filePath.getAbsolutePath();
         ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_FREEZER).get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         List<FreezerItem> freezerItemList = new ArrayList<>();
@@ -38,13 +43,14 @@ public class FreezerServiceInternalTestingImpl implements FreezerServiceInternal
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(freezerItemList);
 
-
-        try (PrintWriter out = new PrintWriter(new FileWriter(String.valueOf(path)))) {
-            out.write(jsonString.toString());
-        } catch (Exception e) {
+        try {
+            FileWriter file = new FileWriter(absolutePath);
+            file.write(jsonString);
+            file.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         return "Json exported on: " + new Date();
     }
 

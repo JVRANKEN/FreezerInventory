@@ -16,3 +16,9 @@
 ### Backend testing
 - For the tests of the backend, we use swagger
   - http://localhost:8080/swagger-ui/index.html
+
+### Firebase data
+- For importing/exporting data through FireBase, billing needs to be setup
+- To avoid this, use:
+  - Export: GET http://localhost:8080/freezer/internaltesting/search/exportfirebase
+  - Import: 

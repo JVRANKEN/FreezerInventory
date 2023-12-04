@@ -21,5 +21,6 @@ public class UrlMapping {
     public static final String DELETE_BY_DOCUMENT_ID = DELETE + "/documentid";
     public static final String DELETE_BY_ITEM = DELETE + "/item";
 
+    public static final String EXPORT_FIREBASE = "/exportfirebase";
 
 }
