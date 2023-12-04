@@ -54,9 +54,4 @@ public class FreezerController {
     public String deleteFreezerItemByName(@RequestParam String itemName) throws ExecutionException, InterruptedException {
         return freezerService.deleteFreezerItemByName(itemName);
     }
-
-    @GetMapping("/test")
-    public ResponseEntity<String> testGetEndpoint() {
-        return ResponseEntity.ok("Test GET endpoint is working!");
-    }
 }

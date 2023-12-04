@@ -35,7 +35,7 @@ public class FreezerControllerSearch {
 //            @ApiResponse(responseCode = "404", description = "Person not found", content = @Content)})
 
     @Operation(summary = "Get all items from the freezer")
-    @GetMapping(UrlMapping.GET_ITEM)
+    @GetMapping()
     public ResponseEntity<List<FreezerItem>> getAllFreezerItems() throws ExecutionException, InterruptedException {
 
         final List<FreezerItem> freezerItemList = freezerService.getAllFreezerItems();
