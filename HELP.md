@@ -21,4 +21,4 @@
 - For importing/exporting data through FireBase, billing needs to be setup
 - To avoid this, use:
   - Export: GET http://localhost:8080/freezer/internaltesting/search/exportfirebase
-  - Import: 
+  - Import: GET http://localhost:8080/freezer/internaltesting/search/importfirebase
