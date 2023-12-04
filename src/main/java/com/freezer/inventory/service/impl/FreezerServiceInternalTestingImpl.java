@@ -45,7 +45,6 @@ public class FreezerServiceInternalTestingImpl implements FreezerServiceInternal
             file.write(jsonString);
             file.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return "Json exported on: " + new Date();
