@@ -28,4 +28,8 @@ public class FreezerItem {
     private Long maxMonths;
     private String comment;
 
+    @Override
+    public String toString() {
+        return "<" + "item=" + item + ", category=" + category + ", type=" + type + ", comment=" + comment + ">";
+    }
 }
