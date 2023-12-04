@@ -41,8 +41,4 @@ public class FreezerControllerInternalTesting {
         return new ResponseEntity<>(exportResult, HttpStatus.OK);
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> testGetEndpoint() {
-        return ResponseEntity.ok("Test GET endpoint is working!");
-    }
 }
