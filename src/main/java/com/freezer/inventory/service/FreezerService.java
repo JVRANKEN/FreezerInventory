@@ -21,8 +21,8 @@ public interface FreezerService {
 
     String createFreezerItem(FreezerItem person) throws ExecutionException, InterruptedException;
 
-    String updateFreezerItem(FreezerItem person) throws ExecutionException, InterruptedException;
+    String updateFreezerItem(FreezerItem freezerItem, String documentId) throws ExecutionException, InterruptedException;
 
     String deleteFreezerItem(String documentId) throws ExecutionException, InterruptedException;
-    // delete freezer item quantity , or lower it
+    String deleteFreezerItemByName(String itemName) throws ExecutionException, InterruptedException;
 }

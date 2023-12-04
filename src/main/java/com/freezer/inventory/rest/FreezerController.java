@@ -39,14 +39,20 @@ public class FreezerController {
 
     @Operation(summary = "Update an existing item for the freezer")
     @PutMapping(UrlMapping.UPDATE)
-    public String updateFreezerItem(@RequestBody FreezerItem person) throws ExecutionException, InterruptedException {
-        return freezerService.updateFreezerItem(person);
+    public String updateFreezerItem(@RequestBody FreezerItem freezerItem, @RequestParam String documentId) throws ExecutionException, InterruptedException {
+        return freezerService.updateFreezerItem(freezerItem, documentId);
     }
 
-    @Operation(summary = "Delete an item in the freezer")
-    @DeleteMapping(UrlMapping.DELETE)
+    @Operation(summary = "Delete an item in the freezer by documentId")
+    @DeleteMapping(UrlMapping.DELETE_BY_DOCUMENT_ID)
     public String deleteFreezerItem(@RequestParam String documentId) throws ExecutionException, InterruptedException {
         return freezerService.deleteFreezerItem(documentId);
+    }
+
+    @Operation(summary = "Delete an item in the freezer by documentId")
+    @DeleteMapping(UrlMapping.DELETE_BY_ITEM)
+    public String deleteFreezerItemByName(@RequestParam String itemName) throws ExecutionException, InterruptedException {
+        return freezerService.deleteFreezerItemByName(itemName);
     }
 
     @GetMapping("/test")

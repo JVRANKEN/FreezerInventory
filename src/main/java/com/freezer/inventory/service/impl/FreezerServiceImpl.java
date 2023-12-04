@@ -117,18 +117,17 @@ public class FreezerServiceImpl implements FreezerService {
 
     @Override
     public String createFreezerItem(FreezerItem freezerItem) throws ExecutionException, InterruptedException {
-        ApiFuture<WriteResult> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
-                .document(String.valueOf(freezerItem.getId()))
-                .set(freezerItem);
+        ApiFuture<DocumentReference> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
+                .add(freezerItem);
 
-        return collectionApiFuture.get().getUpdateTime().toString();
+        return collectionApiFuture.get().toString();
     }
 
     @Override
-    public String updateFreezerItem(FreezerItem freezerItem) throws ExecutionException, InterruptedException {
+    public String updateFreezerItem(FreezerItem freezerItem, String documentId) throws ExecutionException, InterruptedException {
         // In our cases -> we are going to update not on firstName but on objectId
         ApiFuture<WriteResult> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
-                .document(String.valueOf(freezerItem.getId()))
+                .document(documentId)
                 .set(freezerItem);
 
         return collectionApiFuture.get().getUpdateTime().toString();
@@ -139,5 +138,19 @@ public class FreezerServiceImpl implements FreezerService {
         ApiFuture<WriteResult> writeResultApiFuture = dbFireStore.collection(DATABASE_FREEZER).document(documentId).delete();
 
         return "deleted on: " + writeResultApiFuture.get().getUpdateTime().toString();
+    }
+
+    @Override
+    public String deleteFreezerItemByName(String itemName) throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = dbFireStore.collection(DATABASE_FREEZER).whereEqualTo("item", itemName).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        List<String> logMessageList = new ArrayList<>();
+        for (DocumentSnapshot document : documents) {
+            String documentId = document.getId();
+            ApiFuture<WriteResult> writeResultApiFuture = dbFireStore.collection(DATABASE_FREEZER).document(documentId).delete();
+            logMessageList.add(itemName + " with DocID: <" + documentId + "> deleted on: " + writeResultApiFuture.get().getUpdateTime());
+        }
+
+        return String.join("/n", logMessageList);
     }
 }

@@ -16,5 +16,8 @@ public class UrlMapping {
     public static final String GET_CATEGORY = GET + "/category";
     public static final String GET_EXPIRYDATE = GET + "/expirydate";
     public static final String GET_FROZENDATE_ADD_MONTHS = GET + "/frozendate";
+    public static final String DELETE_BY_DOCUMENT_ID = DELETE + "/documentid";
+    public static final String DELETE_BY_ITEM = DELETE + "/item";
+
 
 }
