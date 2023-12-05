@@ -22,3 +22,9 @@
 - To avoid this, use:
   - Export: GET http://localhost:8080/freezer/internaltesting/search/exportfirebase
   - Import: GET http://localhost:8080/freezer/internaltesting/search/importfirebase
+
+### Frontend ideas
+- HTML5 & CSS examples:
+  - https://fit.withlou.com/
+  - https://www.revolutionpersonaltraining.com.au/
+- Angular primeNG: https://www.primefaces.org/sakai-ng/#/uikit/table
