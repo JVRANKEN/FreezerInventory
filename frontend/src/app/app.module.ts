@@ -11,6 +11,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
+import {ToolbarModule} from "primeng/toolbar";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     RadioButtonModule,
     InputTextareaModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    ToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
