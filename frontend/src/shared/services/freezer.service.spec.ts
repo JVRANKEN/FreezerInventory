@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FreezerServiceService } from './freezer-service.service';
+import { FreezerService } from './freezer.service';
 
 describe('FreezerServiceService', () => {
-  let service: FreezerServiceService;
+  let service: FreezerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FreezerServiceService);
+    service = TestBed.inject(FreezerService);
   });
 
   it('should be created', () => {

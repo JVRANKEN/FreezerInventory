@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Freezeritem} from "../models/freezeritem";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class FreezerServiceService {
+@Injectable(
+  {providedIn: 'root'}
+)
+export class FreezerService {
   private urlBasic: string = "http://localhost:8080/freezer"
   private urlREAD: string;
 

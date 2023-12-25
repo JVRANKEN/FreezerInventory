@@ -1,2 +1,35 @@
 <p>list-overview works!</p>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Category</th>
+        <th scope="col">Type</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Expirydate</th>
+        <th scope="col">Frozendate</th>
+        <th scope="col">MaxMonths</th>
+        <th scope="col">Comment</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of freezerItems">
+        <td>{{ item.id }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.type }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.weight }}</td>
+        <td>{{ item.expiryDate }}</td>
+        <td>{{ item.frozenDate }}</td>
+        <td>{{ item.maxMonths }}</td>
+        <td>{{ item.comment }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <app-list-detail></app-list-detail>
