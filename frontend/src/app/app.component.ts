@@ -12,7 +12,7 @@ import {PrimeNGConfig} from "primeng/api";
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-  title = 'frontend';
+  title = 'My Freezer';
 
 
   constructor(private primengConfig: PrimeNGConfig) {

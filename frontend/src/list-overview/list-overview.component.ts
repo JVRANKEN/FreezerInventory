@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ListDetailComponent} from "../list-detail/list-detail.component";
 import {Freezeritem} from "../shared/models/freezeritem";
 import {FreezerService} from "../shared/services/freezer.service";
@@ -10,6 +10,8 @@ import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
 import {SpeedDialModule} from "primeng/speeddial";
+import {MenuItem} from "primeng/api";
+import {ToolbarModule} from "primeng/toolbar";
 
 @Component({
   selector: 'app-list-overview',
@@ -23,16 +25,17 @@ import {SpeedDialModule} from "primeng/speeddial";
     ButtonModule,
     InputTextModule,
     RippleModule,
-    SpeedDialModule
+    SpeedDialModule,
+    ToolbarModule,
   ],
   templateUrl: './list-overview.component.html',
   styleUrl: './list-overview.component.css'
 })
-export class ListOverviewComponent {
-
+export class ListOverviewComponent implements OnInit {
   freezerItems: Freezeritem[];
   typesSet: Set<string>;
   distinctTypes: string [];
+  menuItems: MenuItem[];
 
   constructor(private freezerService: FreezerService) {
     this.freezerItems = [];
@@ -49,11 +52,45 @@ export class ListOverviewComponent {
       }
       this.distinctTypes = Array.from(this.typesSet);
     });
+
+    this.menuItems = [
+      {
+        icon: 'pi pi-pencil',
+        command: () => {
+          // this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+        }
+      },
+      {
+        icon: 'pi pi-refresh',
+        command: () => {
+          // this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+        }
+      },
+      {
+        icon: 'pi pi-trash',
+        command: () => {
+          // this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+        }
+      }
+      // DELETE BUTTON + confirmation
+      // {
+      //   icon: 'pi pi-external-link',
+      //   target: '_blank',
+      //   url: 'http://angular.io'
+      // }
+    ];
+    console.log('my items are =>', this.menuItems);
+
+
   }
 
   clear(table: Table) {
     table.clear();
   }
+  openNew() {
+    var newItem : Freezeritem;
+  }
+
 
   // getSeverity(status: string) {
   //   switch (status.toLowerCase()) {

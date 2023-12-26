@@ -1,9 +1,15 @@
-<!--<app-list-detail *ngFor="let item of freezerItems"-->
-<!--                 [item]="item">-->
-<!--</app-list-detail>-->
+<!--<p-toast></p-toast>-->
+<p-toolbar styleClass="mb-4 gap-2">
+  <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i>
+  <ng-template pTemplate="left">
+    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+<!--    <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedItem()" [disabled]="!selectedProducts || !selectedProducts.length"></button>-->
+  </ng-template>
+</p-toolbar>
 
 <p-table
   #dt1
+  styleClass="p-datatable-striped"
   [value]="freezerItems"
   [showCurrentPageReport]="true"
   [tableStyle]="{ 'min-width': '50rem' }"
@@ -35,6 +41,7 @@
       <th pSortableColumn="dateExpired" style="min-width:15rem">Expiry date <p-sortIcon field="code"></p-sortIcon></th>
       <th pSortableColumn="dateFrozen" style="min-width:15rem">Frozen date</th>
       <th style="min-width:15rem">Comment</th>
+      <th></th>
     </tr>
     <tr>
       <th>
@@ -67,7 +74,7 @@
       </th>
       <th></th>
       <th></th>
-
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-product>
@@ -79,9 +86,10 @@
       <td>{{ product.expiryDate }}</td>
       <td>{{ product.frozenDate }}</td>
       <td>{{ product.comment }}</td>
-      <td>
-        <p-speedDial [model]="items" direction="right" [radius]="80" type="semi-circle"></p-speedDial>
-      </td>
+<!--      Get this in the correct layout!!-->
+<!--      <td>-->
+<!--        <span><p-speedDial [model]="menuItems" direction="left" [radius]="40" type="semi-circle"></p-speedDial></span>-->
+<!--      </td>-->
     </tr>
   </ng-template>
   <ng-template pTemplate="emptymessage">
