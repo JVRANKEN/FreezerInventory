@@ -1,18 +1,44 @@
-<!--<p-card header="{{ item.category }}"-->
-<!--        subheader="{{ item.type }}"-->
-<!--        [style]="{ width: '360px' }">-->
-<!--  <ng-template pTemplate="header">-->
-<!--    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png"/>-->
-<!--  </ng-template>-->
-<!--  <p>-->
-<!--    {{ item.comment }}-->
-<!--  </p>-->
-<!--  <ng-template pTemplate="footer">-->
-<!--    <p-button label="Save" icon="pi pi-check"></p-button>-->
-<!--    <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"-->
-<!--              [style]="{ 'margin-left': '.5em' }"></p-button>-->
-<!--  </ng-template>-->
-<!--</p-card>-->
-
-<!--<br />-->
-<h1>HERE Is my detail</h1>
+<p-card styleClass="user-form" class="flex justify-content-center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+    <div>
+      <label>Item</label>
+      <input pInputText type="text" formControlName="item" placeholder="ex: ijs">
+    </div>
+    <div>
+      <label>Category:</label>
+      <input pInputText type="text" formControlName="category" placeholder="ex: dessert">
+    </div>
+    <div>
+      <label>Type:</label>
+      <input pInputText type="text" formControlName="type" placeholder="ex: vanille">
+    </div>
+    <div>
+      <label>Quantity </label>
+      <input pInputText type="number" formControlName="quantity" placeholder="ex: ijs">
+    </div>
+    <div>
+      <label>Weight:</label>
+      <input pInputText type="text" formControlName="weight" placeholder="ex: dessert">
+    </div>
+    <div>
+      <label>Expiry date:</label>
+      <p-calendar formControlName="expiryDate"></p-calendar>
+    </div>
+    <div>
+      <label>Frozen date: </label>
+      <input pInputText type="date" formControlName="frozenDate" placeholder="ex: ijs">
+    </div>
+    <div>
+      <label>Max months:</label>
+      <input pInputText type="number" formControlName="maxMonths" placeholder="ex: dessert">
+    </div>
+    <div>
+      <label>Comments:</label>
+      <textarea rows="5" cols="30" pInputTextarea type="text" formControlName="comment">
+      </textarea>
+    </div>
+    <button type="submit">Send</button>
+  </form>
+  <p>Form value: {{ form.value | json }}</p>
+  <p>Form status: {{ form.status | json }}</p>
+</p-card>
