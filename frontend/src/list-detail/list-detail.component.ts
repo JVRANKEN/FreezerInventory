@@ -3,6 +3,7 @@ import {NgForOf} from "@angular/common";
 import {Freezeritem} from "../shared/models/freezeritem";
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-detail',
@@ -16,10 +17,12 @@ import {ButtonModule} from "primeng/button";
   styleUrl: './list-detail.component.css'
 })
 export class ListDetailComponent {
-  @Input() item: Freezeritem;
+  // @Input() item: Freezeritem;
 //https://angular.io/guide/inputs-outputs
+  freezerItem: Freezeritem;
 
-  constructor(item: Freezeritem) {
-    this.item = item;
+  constructor(private router: Router) {
+    this.freezerItem = this.router.getCurrentNavigation()?.extras.state?.['response']?.['data'];
+    console.log('my freezeritem in detail = ', this.freezerItem);
   }
 }

@@ -41,6 +41,7 @@
       <th pSortableColumn="dateExpired" style="min-width:15rem">Expiry date <p-sortIcon field="code"></p-sortIcon></th>
       <th pSortableColumn="dateFrozen" style="min-width:15rem">Frozen date</th>
       <th style="min-width:15rem">Comment</th>
+      <th style="width: 5rem"></th>
       <th></th>
     </tr>
     <tr>
@@ -90,6 +91,12 @@
 <!--      <td>-->
 <!--        <span><p-speedDial [model]="menuItems" direction="left" [radius]="40" type="semi-circle"></p-speedDial></span>-->
 <!--      </td>-->
+      <td>
+        <button type="button" pButton pRipple
+                icon="pi pi-plus"
+                (click)="selectedItem(product)">
+        </button>
+      </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="emptymessage">

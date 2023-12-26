@@ -1,4 +1,5 @@
 export class Freezeritem {
+  item: string
   id: string;
   category: string;
   type: string;

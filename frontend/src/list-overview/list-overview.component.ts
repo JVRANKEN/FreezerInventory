@@ -12,6 +12,7 @@ import {RippleModule} from "primeng/ripple";
 import {SpeedDialModule} from "primeng/speeddial";
 import {MenuItem} from "primeng/api";
 import {ToolbarModule} from "primeng/toolbar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-overview',
@@ -37,7 +38,8 @@ export class ListOverviewComponent implements OnInit {
   distinctTypes: string [];
   menuItems: MenuItem[];
 
-  constructor(private freezerService: FreezerService) {
+  constructor(private freezerService: FreezerService,
+              private router: Router) {
     this.freezerItems = [];
     this.distinctTypes = [];
     this.typesSet = new Set<string>();
@@ -87,8 +89,9 @@ export class ListOverviewComponent implements OnInit {
   clear(table: Table) {
     table.clear();
   }
+
   openNew() {
-    var newItem : Freezeritem;
+    var newItem: Freezeritem;
   }
 
 
@@ -110,4 +113,13 @@ export class ListOverviewComponent implements OnInit {
   //       return null;
   //   }
   // }
+
+  selectedItem(freezeritem: Freezeritem) {
+    console.log('selected item => ', freezeritem);
+    this.router.navigate(['detail'], {
+        state: {response: {data: freezeritem}}
+      }
+    );
+    // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
+  }
 }
