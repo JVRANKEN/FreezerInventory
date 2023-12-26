@@ -27,6 +27,7 @@ public class FreezerItem {
     private Date frozenDate;
     private Long maxMonths;
     private String comment;
+    private Boolean existingItem;
 
     @Override
     public String toString() {

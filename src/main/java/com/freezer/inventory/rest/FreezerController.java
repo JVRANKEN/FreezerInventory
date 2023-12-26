@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(UrlMapping.FREEZER)
+@CrossOrigin("*")
 public class FreezerController {
     @Autowired
     private FreezerService freezerService;

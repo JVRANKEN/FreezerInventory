@@ -95,7 +95,7 @@ export class ListDetailComponent {
       console.log('This is a new dataset');
       console.log('original data => ', this.freezerItem);
       console.log('new data => ', formData);
-      this.freezerService.updateFreezerItem(formData).subscribe(response => {
+      this.freezerService.createFreezerItem(formData).subscribe(response => {
         console.log('my response after update => ', response);
       });
     }
