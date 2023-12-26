@@ -1,0 +1,100 @@
+<!--<p-toast></p-toast>-->
+<p-toolbar styleClass="mb-4 gap-2">
+  <i class="pi pi-spin pi-cog" style="font-size: 2rem"></i>
+  <ng-template pTemplate="left">
+    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+<!--    <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedItem()" [disabled]="!selectedProducts || !selectedProducts.length"></button>-->
+  </ng-template>
+</p-toolbar>
+
+<p-table
+  #dt1
+  styleClass="p-datatable-striped"
+  [value]="freezerItems"
+  [showCurrentPageReport]="true"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [rows]="10"
+  dataKey="id"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [globalFilterFields]="['item', 'category', 'type', 'quantity']"
+>
+  <!--  [loading]="loading"-->
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+<!--              <span class="p-input-icon-left ml-auto">-->
+<!--                                <i class="pi pi-search"></i>-->
+<!--                                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"-->
+<!--                                       placeholder="Search item"/>-->
+<!--                            </span>-->
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="item" style="min-width:15rem">Item <p-sortIcon field="code"></p-sortIcon></th>
+      <th pSortableColumn="category" style="min-width:15rem">Category<p-sortIcon field="code"></p-sortIcon></th>
+      <th pSortableColumn="type" style="min-width:15rem">Type <p-sortIcon field="code"></p-sortIcon></th>
+      <th pSortableColumn="quantity" style="min-width:15rem">Quantity <p-sortIcon field="code"></p-sortIcon></th>
+      <th pSortableColumn="dateExpired" style="min-width:15rem">Expiry date <p-sortIcon field="code"></p-sortIcon></th>
+      <th pSortableColumn="dateFrozen" style="min-width:15rem">Frozen date</th>
+      <th style="min-width:15rem">Comment</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter type="text" field="item" display="menu" matchMode="in"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="category" matchMode="in" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-multiSelect [ngModel]="value"
+                           [options]="distinctTypes"
+                           placeholder="Any"
+                           (onChange)="filter($event.value)"
+                           optionLabel="Category">
+              <ng-template let-option pTemplate="item">
+                <div class="inline-block vertical-align-middle">
+                  <span class="ml-1 mt-1">{{ option }}</span>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="type" display="menu"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="numeric" field="quantity" display="menu" matchMode="in"></p-columnFilter>
+      </th>
+      <th>
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td> {{product.item}}</td>
+      <td>{{ product.category }}</td>
+      <td>{{ product.type }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.expiryDate }}</td>
+      <td>{{ product.frozenDate }}</td>
+      <td>{{ product.comment }}</td>
+<!--      Get this in the correct layout!!-->
+<!--      <td>-->
+<!--        <span><p-speedDial [model]="menuItems" direction="left" [radius]="40" type="semi-circle"></p-speedDial></span>-->
+<!--      </td>-->
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="7">No Items found.</td>
+    </tr>
+  </ng-template>
+</p-table>

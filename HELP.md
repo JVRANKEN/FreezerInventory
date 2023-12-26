@@ -22,3 +22,7 @@
 - To avoid this, use:
   - Export: GET http://localhost:8080/freezer/internaltesting/search/exportfirebase
   - Import: GET http://localhost:8080/freezer/internaltesting/search/importfirebase
+
+### Setup frontend structure:
+- https://www.baeldung.com/spring-boot-angular-web
+- 
