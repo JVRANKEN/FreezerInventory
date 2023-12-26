@@ -9,4 +9,5 @@ export class Freezeritem {
   frozenDate: Date;
   maxMonths: number;
   comment: string;
+  existingItem?: boolean = false;
 }

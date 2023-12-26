@@ -90,8 +90,11 @@ export class ListOverviewComponent implements OnInit {
     table.clear();
   }
 
-  openNew() {
+  createNewItem() {
     var newItem: Freezeritem;
+    this.router.navigate(['detail'], {
+        }
+    );
   }
 
 
@@ -114,12 +117,12 @@ export class ListOverviewComponent implements OnInit {
   //   }
   // }
 
-  selectedItem(freezeritem: Freezeritem) {
+  updateSelectedItem(freezeritem: Freezeritem) {
     console.log('selected item => ', freezeritem);
+    freezeritem.existingItem = true;
     this.router.navigate(['detail'], {
         state: {response: {data: freezeritem}}
       }
     );
-    // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
   }
 }

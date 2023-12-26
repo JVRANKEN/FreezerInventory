@@ -14,7 +14,7 @@
     </div>
     <div>
       <label>Quantity </label>
-      <input pInputText type="number" formControlName="quantity" placeholder="ex: ijs">
+      <input pInputText type="number" formControlName="quantity" placeholder="ex: number of items">
     </div>
     <div>
       <label>Weight:</label>
@@ -26,7 +26,7 @@
     </div>
     <div>
       <label>Frozen date: </label>
-      <input pInputText type="date" formControlName="frozenDate" placeholder="ex: ijs">
+      <p-calendar formControlName="frozenDate"></p-calendar>
     </div>
     <div>
       <label>Max months:</label>
@@ -37,7 +37,8 @@
       <textarea rows="5" cols="30" pInputTextarea type="text" formControlName="comment">
       </textarea>
     </div>
-    <button type="submit">Send</button>
+    <button pButton pRipple type="submit">Send</button>
+<!--    TODO: clear form button-->
   </form>
   <p>Form value: {{ form.value | json }}</p>
   <p>Form status: {{ form.status | json }}</p>
