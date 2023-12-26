@@ -37,9 +37,13 @@
       <textarea rows="5" cols="30" pInputTextarea type="text" formControlName="comment">
       </textarea>
     </div>
-    <button pButton pRipple type="submit">Send</button>
-<!--    TODO: clear form button-->
+    <button pButton pRipple type="submit" icon="pi pi-check" class="p-button-success">Send</button>
+    <button pButton pRipple label="Delete" severity="danger" icon="pi pi-trash"></button>
+    <button pButton pRipple label="Cancel" icon="pi pi-times"></button>
+
+    <!--    TODO: clear form button-->
   </form>
   <p>Form value: {{ form.value | json }}</p>
   <p>Form status: {{ form.status | json }}</p>
+
 </p-card>
