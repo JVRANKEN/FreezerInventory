@@ -15,6 +15,13 @@ export class FreezerService {
   }
 
   public findAll(): Observable<Freezeritem[]> {
-    return this.http.get<Freezeritem[]>(this.urlREAD);
+    return this.http.get<Freezeritem[]>(`${this.urlREAD}`);
+  }
+
+  public updateFreezerItem(freezerItem: Freezeritem): Observable<any> {
+    return this.http.put(`${this.urlBasic}/put`, freezerItem);
+  }
+  public createFreezerItem(freezerItem: Freezeritem): Observable<any> {
+    return this.http.post(`${this.urlBasic}/post`, freezerItem);
   }
 }

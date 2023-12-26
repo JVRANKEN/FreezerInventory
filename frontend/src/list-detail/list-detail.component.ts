@@ -9,6 +9,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {CalendarModule} from "primeng/calendar";
 import {RippleModule} from "primeng/ripple";
+import {FreezerService} from "../shared/services/freezer.service";
 
 @Component({
   selector: 'app-list-detail',
@@ -32,13 +33,14 @@ export class ListDetailComponent {
   // @Input() item: Freezeritem;
 //https://angular.io/guide/inputs-outputs
   public freezerItem: Freezeritem = new Freezeritem();
-  public freezerItemUpdated: Freezeritem ;
+  public freezerItemUpdated: Freezeritem;
 
   public form: FormGroup;
   item: any;
 
   constructor(private router: Router,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private freezerService: FreezerService) {
     this.freezerItem = this.router.getCurrentNavigation()?.extras.state?.['response']?.['data'];
     console.log('my freezeritem in detail = ', this.freezerItem);
     // TODO -> one create form method, and then map data on formbuilder
@@ -81,15 +83,21 @@ export class ListDetailComponent {
 
   onSubmit(myForm: any) {
     let formData = myForm.value as Freezeritem;
-    if(this.freezerItem != undefined && this.freezerItem.existingItem) {
+    if (this.freezerItem != undefined && this.freezerItem.existingItem) {
       console.log('This is an existing dataset');
       console.log('original data => ', this.freezerItem);
       console.log('new data => ', myForm);
-      console.log('my new freezer item =>' , formData)
+      console.log('my new freezer item =>', formData);
+      this.freezerService.updateFreezerItem(formData).subscribe(response => {
+        console.log('my response after update => ', response);
+      });
     } else {
       console.log('This is a new dataset');
       console.log('original data => ', this.freezerItem);
       console.log('new data => ', formData);
+      this.freezerService.updateFreezerItem(formData).subscribe(response => {
+        console.log('my response after update => ', response);
+      });
     }
   }
 }
