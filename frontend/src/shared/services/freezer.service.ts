@@ -18,8 +18,10 @@ export class FreezerService {
     return this.http.get<Freezeritem[]>(`${this.urlREAD}`);
   }
 
+ // TODO how to pass param documentId??
   public updateFreezerItem(freezerItem: Freezeritem): Observable<any> {
-    return this.http.put(`${this.urlBasic}/update`, freezerItem);
+    return this.http.put(`${this.urlBasic}/update`, freezerItem,
+      );
   }
 
   public createFreezerItem(freezerItem: Freezeritem): Observable<Freezeritem> {

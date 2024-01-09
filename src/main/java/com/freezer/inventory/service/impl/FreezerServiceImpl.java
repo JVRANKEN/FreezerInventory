@@ -1,7 +1,5 @@
 package com.freezer.inventory.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.freezer.inventory.objects.FreezerItem;
 import com.freezer.inventory.service.FreezerService;
 import com.google.api.core.ApiFuture;
@@ -140,10 +138,10 @@ public class FreezerServiceImpl implements FreezerService {
     }
 
     @Override
-    public String updateFreezerItem(FreezerItem freezerItem, String documentId) throws ExecutionException, InterruptedException {
+    public String updateFreezerItem(FreezerItem freezerItem) throws ExecutionException, InterruptedException {
         // In our cases -> we are going to update not on firstName but on objectId
         ApiFuture<WriteResult> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
-                .document(documentId)
+                .document(freezerItem.getDocumentId())
                 .set(freezerItem);
 
         return collectionApiFuture.get().getUpdateTime().toString();
