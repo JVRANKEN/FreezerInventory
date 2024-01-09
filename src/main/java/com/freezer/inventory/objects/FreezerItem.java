@@ -24,6 +24,8 @@ public class FreezerItem {
     private Long quantity;
     // weigth = in gram
     private Long weight;
+    private Date dateInput;
+    private Date dateUpdated;
     private Date expiryDate;
     private Date frozenDate;
     private Long maxMonths;

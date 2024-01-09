@@ -5,6 +5,8 @@ export class Freezeritem {
   type: string;
   quantity: number;
   weight: number;
+  dateInput: Date;
+  dateUpdated: Date;
   expiryDate: string | null;
   frozenDate: string | null;
   maxMonths: number;

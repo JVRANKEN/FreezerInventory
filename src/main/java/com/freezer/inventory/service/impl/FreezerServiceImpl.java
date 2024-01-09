@@ -131,6 +131,8 @@ public class FreezerServiceImpl implements FreezerService {
 
     @Override
     public String createFreezerItem(FreezerItem freezerItem) throws ExecutionException, InterruptedException {
+        freezerItem.setDateInput(new Date());
+        freezerItem.setDateUpdated(new Date());
         ApiFuture<DocumentReference> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
                 .add(freezerItem);
 
@@ -140,6 +142,7 @@ public class FreezerServiceImpl implements FreezerService {
     @Override
     public String updateFreezerItem(FreezerItem freezerItem) throws ExecutionException, InterruptedException {
         // In our cases -> we are going to update not on firstName but on objectId
+        freezerItem.setDateUpdated(new Date());
         ApiFuture<WriteResult> collectionApiFuture = dbFireStore.collection(DATABASE_FREEZER)
                 .document(freezerItem.getDocumentId())
                 .set(freezerItem);
