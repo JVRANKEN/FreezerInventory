@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ListDetailComponent} from "../list-detail/list-detail.component";
 import {Freezeritem} from "../shared/models/freezeritem";
 import {FreezerService} from "../shared/services/freezer.service";
-import {NgForOf} from "@angular/common";
+import {DatePipe, NgForOf} from "@angular/common";
 import {Table, TableModule} from "primeng/table";
 import {MultiSelectModule} from "primeng/multiselect";
 import {FormsModule} from "@angular/forms";
@@ -28,6 +28,7 @@ import {Router} from "@angular/router";
     RippleModule,
     SpeedDialModule,
     ToolbarModule,
+    DatePipe,
   ],
   templateUrl: './list-overview.component.html',
   styleUrl: './list-overview.component.css'
