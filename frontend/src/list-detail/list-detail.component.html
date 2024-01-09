@@ -38,8 +38,13 @@
       </textarea>
     </div>
     <div class="card flex flex-wrap justify-content-center">
+
       <button pButton pRipple icon="pi pi-check" class="p-button-success" (click)="onSubmit(form)">Save</button>
-      <p-button pRipple label="Delete" severity="danger" icon="pi pi-trash" (click)="onDeleteItem(form)"></p-button>
+      <p-toast></p-toast>
+      <p-confirmDialog></p-confirmDialog>
+<!--      <p-button (click)="confirm2($event)" icon="pi pi-times" label="Delete" styleClass="p-button-danger"></p-button>-->
+
+      <p-button pRipple label="Delete" severity="danger" icon="pi pi-trash" (click)="onDeleteItem($event, form)"></p-button>
       <p-button pRipple label="Cancel" icon="pi pi-times" severity="warning" (click)="onCancelItem(form)"></p-button>
     </div>
 

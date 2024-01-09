@@ -10,6 +10,9 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {CalendarModule} from "primeng/calendar";
 import {RippleModule} from "primeng/ripple";
 import {FreezerService} from "../shared/services/freezer.service";
+import {ToastModule} from "primeng/toast";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-list-detail',
@@ -24,7 +27,9 @@ import {FreezerService} from "../shared/services/freezer.service";
     InputTextModule,
     InputTextareaModule,
     CalendarModule,
-    RippleModule
+    RippleModule,
+    ToastModule,
+    ConfirmDialogModule
   ],
   templateUrl: './list-detail.component.html',
   styleUrl: './list-detail.component.css'
@@ -41,7 +46,8 @@ export class ListDetailComponent {
   constructor(private router: Router,
               private fb: FormBuilder,
               private freezerService: FreezerService,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private confirmationService: ConfirmationService, private messageService: MessageService) {
     this.freezerItem = this.router.getCurrentNavigation()?.extras.state?.['response']?.['data'];
     console.log('my freezeritem in detail = ', this.freezerItem);
     // TODO -> one create form method, and then map data on formbuilder
@@ -111,15 +117,31 @@ export class ListDetailComponent {
     }
   }
 
-  onDeleteItem(form: FormGroup) {
-    let formData = form.value as Freezeritem;
-    console.log("i am deleteing ::", formData.documentId);
-    if (formData.documentId != null) {
-      console.log("i am deleteing ::", formData.documentId);
-      this.freezerService.deleteFreezerItemByDocId(formData.documentId).subscribe(resolve => {
-        console.log('my response = ', resolve);
-      });
-    }
+  onDeleteItem(event: Event, form: FormGroup) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Do you want to delete this record?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass:"p-button-danger p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text",
+      acceptIcon:"none",
+      rejectIcon:"none",
+
+      accept: () => {
+        let formData = form.value as Freezeritem;
+        if (formData.documentId != null) {
+          this.freezerService.deleteFreezerItemByDocId(formData.documentId).subscribe(resolve => {
+            console.log('my response = ', resolve);
+          });
+        }
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+      }
+    });
+
   }
 
   onCancelItem(form: FormGroup) {
@@ -130,4 +152,9 @@ export class ListDetailComponent {
       form.reset();
     }
   }
+
+  confirm2() {
+
+  }
+
 }
