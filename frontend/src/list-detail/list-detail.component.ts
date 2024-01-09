@@ -97,12 +97,12 @@ export class ListDetailComponent {
     if (this.freezerItem != undefined && this.freezerItem.existingItem) {
       console.log('my form data new for update', formData);
       this.freezerService.updateFreezerItem(formData).subscribe(response => {
-        // console.log('my response after update => ', response);
+        console.log('my response after update => ', response);
       });
     } else {
       console.log('my form data new for create', formData);
       this.freezerService.createFreezerItem(formData).subscribe(response => {
-        // console.log('my response after update => ', response);
+        console.log('my response after update => ', response);
       });
     }
   }
