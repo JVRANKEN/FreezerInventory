@@ -1,12 +1,12 @@
 export class Freezeritem {
-  item: string
-  id: string;
+  documentId: string;
+  item: string;
   category: string;
   type: string;
   quantity: number;
   weight: number;
-  expiryDate: Date;
-  frozenDate: Date;
+  expiryDate: string | null;
+  frozenDate: string | null;
   maxMonths: number;
   comment: string;
   existingItem?: boolean = false;

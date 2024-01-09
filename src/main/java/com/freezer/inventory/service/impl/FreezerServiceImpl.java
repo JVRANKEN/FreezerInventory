@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class FreezerServiceImpl implements FreezerService {
+    // TODO change name , get it from prop file
     private static final String DATABASE_FREEZER = "freezer_items";
     private final Firestore dbFireStore = FirestoreClient.getFirestore();
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -30,6 +31,7 @@ public class FreezerServiceImpl implements FreezerService {
 
         for (DocumentSnapshot document : documents) {
             FreezerItem freezerItem = document.toObject(FreezerItem.class);
+            freezerItem.setDocumentId(document.getId());
             freezerItemList.add(freezerItem);
         }
 

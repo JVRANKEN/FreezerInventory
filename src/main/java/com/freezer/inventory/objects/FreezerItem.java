@@ -15,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FreezerItem {
+    private String documentId;
     private String item;
     // EXAMPLE: vlees, groenten, vis
     private String category;
