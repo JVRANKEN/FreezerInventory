@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ListDetailComponent} from "../list-detail/list-detail.component";
 import {Freezeritem} from "../shared/models/freezeritem";
 import {FreezerService} from "../shared/services/freezer.service";
-import {NgForOf} from "@angular/common";
+import {DatePipe, NgForOf} from "@angular/common";
 import {Table, TableModule} from "primeng/table";
 import {MultiSelectModule} from "primeng/multiselect";
 import {FormsModule} from "@angular/forms";
@@ -12,6 +12,7 @@ import {RippleModule} from "primeng/ripple";
 import {SpeedDialModule} from "primeng/speeddial";
 import {MenuItem} from "primeng/api";
 import {ToolbarModule} from "primeng/toolbar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-overview',
@@ -27,6 +28,7 @@ import {ToolbarModule} from "primeng/toolbar";
     RippleModule,
     SpeedDialModule,
     ToolbarModule,
+    DatePipe,
   ],
   templateUrl: './list-overview.component.html',
   styleUrl: './list-overview.component.css'
@@ -37,7 +39,8 @@ export class ListOverviewComponent implements OnInit {
   distinctTypes: string [];
   menuItems: MenuItem[];
 
-  constructor(private freezerService: FreezerService) {
+  constructor(private freezerService: FreezerService,
+              private router: Router) {
     this.freezerItems = [];
     this.distinctTypes = [];
     this.typesSet = new Set<string>();
@@ -87,8 +90,12 @@ export class ListOverviewComponent implements OnInit {
   clear(table: Table) {
     table.clear();
   }
-  openNew() {
-    var newItem : Freezeritem;
+
+  createNewItem() {
+    var newItem: Freezeritem;
+    this.router.navigate(['detail'], {
+        }
+    );
   }
 
 
@@ -110,4 +117,13 @@ export class ListOverviewComponent implements OnInit {
   //       return null;
   //   }
   // }
+
+  updateSelectedItem(freezeritem: Freezeritem) {
+    console.log('selected item => ', freezeritem);
+    freezeritem.existingItem = true;
+    this.router.navigate(['detail'], {
+        state: {response: {data: freezeritem}}
+      }
+    );
+  }
 }

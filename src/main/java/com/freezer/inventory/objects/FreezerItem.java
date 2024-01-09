@@ -15,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FreezerItem {
+    private String documentId;
     private String item;
     // EXAMPLE: vlees, groenten, vis
     private String category;
@@ -23,10 +24,13 @@ public class FreezerItem {
     private Long quantity;
     // weigth = in gram
     private Long weight;
+    private Date dateInput;
+    private Date dateUpdated;
     private Date expiryDate;
     private Date frozenDate;
     private Long maxMonths;
     private String comment;
+    private Boolean existingItem;
 
     @Override
     public String toString() {

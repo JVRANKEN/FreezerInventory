@@ -15,6 +15,23 @@ export class FreezerService {
   }
 
   public findAll(): Observable<Freezeritem[]> {
-    return this.http.get<Freezeritem[]>(this.urlREAD);
+    return this.http.get<Freezeritem[]>(`${this.urlREAD}`);
+  }
+
+  // TODO how to pass param documentId??
+  public updateFreezerItem(freezerItem: Freezeritem): Observable<Freezeritem> {
+    return this.http.put<Freezeritem>(`${this.urlBasic}/update`, freezerItem);
+  }
+
+  public createFreezerItem(freezerItem: Freezeritem): Observable<Freezeritem> {
+    return this.http.post<Freezeritem>(`${this.urlBasic}/create`, freezerItem);
+  }
+
+  public deleteFreezerItemByDocId(documentId: string): Observable<String> {
+    return this.http.delete<String>(`${this.urlBasic}/delete/documentid`,
+      {params: {
+          documentId: documentId
+        }
+      });
   }
 }

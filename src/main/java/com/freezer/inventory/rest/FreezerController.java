@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(UrlMapping.FREEZER)
+@CrossOrigin(origins = "http://localhost:4200")
 public class FreezerController {
     @Autowired
     private FreezerService freezerService;
@@ -25,7 +26,7 @@ public class FreezerController {
 
 //    @Operation(summary = "Get a person by the id")
 //    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Found the person",
+//            @ApiResponse(responseCode = "200", description = "Found the p erson",
 //                    content = {@Content(mediaType = "application/json",
 //                            schema = @Schema(implementation = Person.class))}),
 //            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
@@ -37,12 +38,17 @@ public class FreezerController {
         return freezerService.createFreezerItem(freezerItem);
     }
 
+//    @Operation(summary = "Update an existing item for the freezer")
+//    @PutMapping(UrlMapping.UPDATE)
+//    public String updateFreezerItem(@RequestBody FreezerItem freezerItem, @RequestParam String documentId) throws ExecutionException, InterruptedException {
+//        return freezerService.updateFreezerItem(freezerItem, documentId);
+//    }
+
     @Operation(summary = "Update an existing item for the freezer")
     @PutMapping(UrlMapping.UPDATE)
-    public String updateFreezerItem(@RequestBody FreezerItem freezerItem, @RequestParam String documentId) throws ExecutionException, InterruptedException {
-        return freezerService.updateFreezerItem(freezerItem, documentId);
+    public String updateFreezerItem(@RequestBody FreezerItem freezerItem) throws ExecutionException, InterruptedException {
+        return freezerService.updateFreezerItem(freezerItem);
     }
-
     @Operation(summary = "Delete an item in the freezer by documentId")
     @DeleteMapping(UrlMapping.DELETE_BY_DOCUMENT_ID)
     public String deleteFreezerItem(@RequestParam String documentId) throws ExecutionException, InterruptedException {

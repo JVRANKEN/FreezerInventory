@@ -1,17 +1,55 @@
-<p-card header="{{ item.category }}"
-        subheader="{{ item.type }}"
-        [style]="{ width: '360px' }">
-  <ng-template pTemplate="header">
-    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png"/>
-  </ng-template>
-  <p>
-    {{ item.comment }}
-  </p>
-  <ng-template pTemplate="footer">
-    <p-button label="Save" icon="pi pi-check"></p-button>
-    <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"
-              [style]="{ 'margin-left': '.5em' }"></p-button>
-  </ng-template>
-</p-card>
+<p-card styleClass="user-form" class="flex justify-content-center">
+  <form [formGroup]="form">
+    <div>
+      <label>Item</label>
+      <input pInputText type="text" formControlName="item" placeholder="ex: ijs">
+    </div>
+    <div>
+      <label>Category:</label>
+      <input pInputText type="text" formControlName="category" placeholder="ex: dessert">
+    </div>
+    <div>
+      <label>Type:</label>
+      <input pInputText type="text" formControlName="type" placeholder="ex: vanille">
+    </div>
+    <div>
+      <label>Quantity </label>
+      <input pInputText type="number" formControlName="quantity" placeholder="ex: number of items">
+    </div>
+    <div>
+      <label>Weight:</label>
+      <input pInputText type="number" formControlName="weight" placeholder="ex: dessert">
+    </div>
+    <div>
+      <label>Expiry date:</label>
+      <p-calendar [touchUI]="true" formControlName="expiryDate" dateFormat="dd-mm-yy"></p-calendar>
+    </div>
+    <div>
+      <label>Frozen date: </label>
+      <p-calendar [touchUI]="true" formControlName="frozenDate" dateFormat="dd-mm-yy"></p-calendar>
+    </div>
+    <div>
+      <label>Max months:</label>
+      <input pInputText type="number" formControlName="maxMonths" placeholder="ex: 8">
+    </div>
+    <div>
+      <label>Comments:</label>
+      <textarea rows="5" cols="30" pInputTextarea type="text" formControlName="comment">
+      </textarea>
+    </div>
+    <div class="card flex flex-wrap justify-content-center">
 
-<br />
+      <button pButton pRipple icon="pi pi-check" class="p-button-success" (click)="onSubmit(form)">Save</button>
+      <p-toast></p-toast>
+      <p-confirmDialog></p-confirmDialog>
+<!--      <p-button (click)="confirm2($event)" icon="pi pi-times" label="Delete" styleClass="p-button-danger"></p-button>-->
+
+      <p-button pRipple label="Delete" severity="danger" icon="pi pi-trash" (click)="onDeleteItem($event, form)"></p-button>
+      <p-button pRipple label="Cancel" icon="pi pi-times" severity="warning" (click)="onCancelItem(form)"></p-button>
+    </div>
+
+  </form>
+  <p>Form value: {{ form.value | json }}</p>
+  <p>Form status: {{ form.status | json }}</p>
+
+</p-card>
