@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(UrlMapping.FREEZER_INTERNAL_TESTING + UrlMapping.SEARCH)
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class FreezerControllerInternalTesting {
     @Autowired
     private FreezerServiceInternalTesting freezerServiceInternalTesting;

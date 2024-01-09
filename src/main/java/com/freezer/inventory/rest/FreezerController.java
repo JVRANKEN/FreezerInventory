@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(UrlMapping.FREEZER)
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class FreezerController {
     @Autowired
     private FreezerService freezerService;
@@ -26,7 +26,7 @@ public class FreezerController {
 
 //    @Operation(summary = "Get a person by the id")
 //    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Found the person",
+//            @ApiResponse(responseCode = "200", description = "Found the p erson",
 //                    content = {@Content(mediaType = "application/json",
 //                            schema = @Schema(implementation = Person.class))}),
 //            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),

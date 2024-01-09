@@ -1,5 +1,5 @@
 <p-card styleClass="user-form" class="flex justify-content-center">
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+  <form [formGroup]="form">
     <div>
       <label>Item</label>
       <input pInputText type="text" formControlName="item" placeholder="ex: ijs">
@@ -37,9 +37,11 @@
       <textarea rows="5" cols="30" pInputTextarea type="text" formControlName="comment">
       </textarea>
     </div>
-    <button pButton pRipple type="submit" icon="pi pi-check" class="p-button-success">Send</button>
-    <button pButton pRipple label="Delete" severity="danger" icon="pi pi-trash"></button>
-    <button pButton pRipple label="Cancel" icon="pi pi-times"></button>
+    <!--    <span class="p-buttonset"  type="submit">-->
+    <button pButton pRipple icon="pi pi-check" class="p-button-success" (click)="onSubmit(form)">Send</button>
+    <button pButton pRipple label="Delete" severity="danger" icon="pi pi-trash" (click)="onDeleteItem(form)"></button>
+    <button pButton pRipple label="Cancel" icon="pi pi-times" severity="help" (click)="onCancelItem(form)"></button>
+    <!--    </span>-->
 
     <!--    TODO: clear form button-->
   </form>

@@ -10,6 +10,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {CalendarModule} from "primeng/calendar";
 import {RippleModule} from "primeng/ripple";
 import {FreezerService} from "../shared/services/freezer.service";
+import {resolve} from "@angular/compiler-cli";
 
 @Component({
   selector: 'app-list-detail',
@@ -97,13 +98,37 @@ export class ListDetailComponent {
     if (this.freezerItem != undefined && this.freezerItem.existingItem) {
       console.log('my form data new for update', formData);
       this.freezerService.updateFreezerItem(formData).subscribe(response => {
+        // TODO FIX ERROR, update item in form
         console.log('my response after update => ', response);
+        // formData.reset();
+
       });
     } else {
       console.log('my form data new for create', formData);
       this.freezerService.createFreezerItem(formData).subscribe(response => {
+        // TODO FIX ERROR, update item in form
         console.log('my response after update => ', response);
       });
+    }
+  }
+
+  onDeleteItem(form: FormGroup) {
+    let formData = form.value as Freezeritem;
+    console.log("i am deleteing ::", formData.documentId);
+    if (formData.documentId != null) {
+      console.log("i am deleteing ::", formData.documentId);
+      this.freezerService.deleteFreezerItemByDocId(formData.documentId).subscribe(resolve => {
+        console.log('my response = ', resolve);
+      });
+    }
+  }
+
+  onCancelItem(form: FormGroup) {
+    let formData = form.value as Freezeritem;
+    if (formData.documentId != null) {
+      this.createFormWithData();
+    } else {
+      form.reset();
     }
   }
 }
