@@ -10,7 +10,6 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {CalendarModule} from "primeng/calendar";
 import {RippleModule} from "primeng/ripple";
 import {FreezerService} from "../shared/services/freezer.service";
-import {resolve} from "@angular/compiler-cli";
 
 @Component({
   selector: 'app-list-detail',
