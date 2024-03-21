@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping(UrlMapping.FREEZER + UrlMapping.SEARCH)
 // TODO search for a better fix for the cors error
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class FreezerControllerSearch {
     @Autowired
     private FreezerService freezerService;
